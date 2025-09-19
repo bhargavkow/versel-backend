@@ -26,8 +26,7 @@ const homepageCategorySchema = new mongoose.Schema({
     type: Number,
     required: [true, 'Homepage order is required'],
     min: [1, 'Homepage order must be at least 1'],
-    unique: true,
-    index: true
+    unique: true
   },
   linkTo: {
     type: String,

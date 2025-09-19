@@ -17,8 +17,7 @@ const faqSchema = new mongoose.Schema({
     type: Number,
     required: [true, 'Display order is required'],
     min: [1, 'Display order must be at least 1'],
-    unique: true,
-    index: true
+    unique: true
   },
   isActive: {
     type: Boolean,
