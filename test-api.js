@@ -1,7 +1,7 @@
 // Test script to check if the photo carousel API is working
 const axios = require('axios');
 
-const API_URL = 'http://localhost:5000';
+const API_URL = process.env.API_URL || 'https://vercel-backend-seven.vercel.app';
 
 async function testAPI() {
   try {

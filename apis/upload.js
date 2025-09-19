@@ -81,7 +81,7 @@ router.post('/image', authenticateToken, upload.single('image'), async (req, res
         originalName: req.file.originalname,
         size: req.file.size,
         path: `/uploads/${req.file.filename}`,
-        url: `http://localhost:3000/uploads/${req.file.filename}` // Frontend URL
+        url: `${process.env.FRONTEND_URL || 'https://versel-frontend.vercel.app'}/uploads/${req.file.filename}` // Frontend URL
       }
     });
 
@@ -120,7 +120,7 @@ router.post('/images', authenticateToken, upload.array('images', 10), async (req
       originalName: file.originalname,
       size: file.size,
       path: `/uploads/${file.filename}`,
-      url: `http://localhost:3000/uploads/${file.filename}`
+      url: `${process.env.FRONTEND_URL || 'https://versel-frontend.vercel.app'}/uploads/${file.filename}`
     }));
 
     res.json({
@@ -181,7 +181,7 @@ router.get('/images', authenticateToken, async (req, res) => {
       return {
         filename: filename,
         path: `/uploads/${filename}`,
-        url: `http://localhost:3000/uploads/${filename}`,
+        url: `${process.env.FRONTEND_URL || 'https://versel-frontend.vercel.app'}/uploads/${filename}`,
         size: stats.size,
         createdAt: stats.birthtime,
         modifiedAt: stats.mtime
