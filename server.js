@@ -26,7 +26,12 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+  origin: [
+    'http://localhost:3000', 
+    'http://127.0.0.1:3000',
+    'https://versel-frontend.vercel.app',  // Add your Vercel frontend URL here
+    'https://*.vercel.app'  // Allow all Vercel subdomains
+  ],
   credentials: true
 }));
 app.use(bodyParser.json());
@@ -67,6 +72,21 @@ console.log('  - /api/faqs');
 console.log('  - /api/user');
 console.log('  - /api/auth');
 console.log('  - /api/upload');
+
+// Root endpoint
+app.get('/', (req, res) => {
+  res.json({ 
+    message: 'Product API Backend is running',
+    version: '1.0.0',
+    endpoints: [
+      '/api/products',
+      '/api/categories',
+      '/api/auth',
+      '/api/health'
+    ],
+    timestamp: new Date().toISOString()
+  });
+});
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
