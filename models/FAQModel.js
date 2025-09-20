@@ -33,7 +33,7 @@ const faqSchema = new mongoose.Schema({
 
 // Index for better query performance
 faqSchema.index({ isActive: 1 });
-faqSchema.index({ displayOrder: 1 });
+// Note: displayOrder already has an index due to unique: true constraint
 
 // Virtual for formatted creation date
 faqSchema.virtual('formattedCreatedAt').get(function() {

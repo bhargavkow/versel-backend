@@ -49,7 +49,7 @@ const homepageCategorySchema = new mongoose.Schema({
 
 // Index for better query performance
 homepageCategorySchema.index({ displayOnHome: 1 });
-homepageCategorySchema.index({ homepageOrder: 1 });
+// Note: homepageOrder already has an index due to unique: true constraint
 
 // Virtual for formatted creation date
 homepageCategorySchema.virtual('formattedCreatedAt').get(function() {

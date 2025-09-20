@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -26,7 +27,7 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors({
-  origin: [
+  origin: process.env.CORS_ORIGIN || [
     'http://localhost:3000', 
     'http://127.0.0.1:3000',
     'https://versel-frontend.vercel.app',  // Add your Vercel frontend URL here
