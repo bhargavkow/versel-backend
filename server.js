@@ -59,11 +59,34 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Handle preflight requests explicitly
 app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', req.headers.origin || '*');
+  const origin = req.headers.origin;
+  console.log('OPTIONS request from origin:', origin);
+  
+  res.header('Access-Control-Allow-Origin', origin || '*');
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Max-Age', '86400'); // 24 hours
   res.sendStatus(200);
+});
+
+// Add CORS headers to all responses
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  console.log('Request from origin:', origin, 'Method:', req.method);
+  
+  if (origin && (
+    origin.includes('stylehub-lime.vercel.app') || 
+    origin.includes('localhost:3000') || 
+    origin.includes('127.0.0.1:3000')
+  )) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  
+  next();
 });
 
 // Serve static files (uploaded images) from frontend public folder
