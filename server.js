@@ -31,6 +31,7 @@ app.use(cors({
     'http://localhost:3000', 
     'http://127.0.0.1:3000',
     'https://versel-frontend.vercel.app',  // Add your Vercel frontend URL here
+    'https://stylehub-lime.vercel.app',   // Add your deployed frontend URL
     'https://*.vercel.app'  // Allow all Vercel subdomains
   ],
   credentials: true
